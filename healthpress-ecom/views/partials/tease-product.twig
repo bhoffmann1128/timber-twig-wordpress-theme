@@ -1,0 +1,30 @@
+<article {{ fn('post_class', ['$classes', 'entry', 'product__item'] ) }}>
+
+    {{ fn('timber_set_product', post) }}
+
+    
+        <div class="product__item-inner">
+
+            {% if post.meta('new_tag') %}
+                <div class="product__item-newtag"><span>NEW!</span></div>
+            {% endif %}
+
+            <a href="{{post.link}}">
+                <img src="{{get_image(post.thumbnail).src | resize(300)}}" />
+            </a>
+
+            {% if post.title %}
+                <h3 class="product__item-title"><a href="{{ post.link }}">{{ post.title }}</a></h3>
+            {% else %}
+                <h3 class="product__item-title"><a href="{{ post.link }}">{{ fn('the_title') }}</a></h3>
+            {% endif %}
+            
+            {% do action( 'woocommerce_after_shop_loop_item_title' ) %}
+            {% do action( 'woocommerce_after_shop_loop_item' ) %}
+
+            
+        </div>
+
+    
+
+</article>

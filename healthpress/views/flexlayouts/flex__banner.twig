@@ -1,0 +1,30 @@
+{{ enqueue_style('flex-banner','_flexbanner.css') }}
+{{ enqueue_package('swiper-script', '/vendor/swiper/swiper-bundle.min.js', 'swiper-style', '/vendor/swiper/swiper-bundle.min.css' )}}
+
+<section class="banner__rotation animate__section">
+  <div class="banner__items swiper-banner">
+    <div class="swiper-wrapper">
+        {% for banner_item in flexlayout.banner_items %}
+            <div class="banner__single_item swiper-slide">
+                <div class="banner__image"  style="background-image: url({{ get_image(banner_item.banner_image).src }})" ></div>
+                <div class="banner__content"><span class="banner__blue_marker"></span>{{banner_item.banner_content}}</div>
+                <div class="banner__bottom_strip">
+                    {% if banner_item.banner_link %}
+                    <a href="{{banner_item.banner_link}}">{{banner_item.banner_link_label}} <img src="{{theme.uri}}/images/arrow-sm-right.svg" alt="right arrow" /></a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+  </div>
+  {% if flexlayout.benner_items | length > 0 %}
+    <div class="banner__button_container">
+        <div class="swiper-button-prev flexbanner__prev"></div>
+        <div class="swiper-button-next flexbanner__next"></div>
+    </div>
+    <div class="swiper-pagination"></div>
+    {% endif %}
+</section>
+
+
+    

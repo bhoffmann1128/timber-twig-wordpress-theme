@@ -1,0 +1,37 @@
+{{enqueue_child_style('flex-bf-trainings', '_flex_bf_trainings.css')}}
+<section class="flex__bf_trainings animate__section">
+
+    <div class="flex__bf_trainings_header section__header">
+        <h2>{{flexlayout.callout_title}}</h2>
+        <a href="{{flexlayout.callout_link}}" class="btn btn-arrow">VISIT THE WEBSITE<img src="{{theme.uri}}/images/arrow-sm-right.svg" height="25px"/></a>
+    </div>
+
+    <div class="flex__bf_trainings_bottom">
+        <div class="flex__bf_trainings_left">
+            <img src="{{get_image(flexlayout.callout_image).src | resize(600) }}" />
+            {{flexlayout.callout_text}}
+        </div>
+        <div class="flex__bf_trainings_right">
+            <h3><img src="{{theme.link}}/images/calendar-icon.svg" height="25px" />Upcoming Best Friends Trainings</h3>
+            <ul class="bf__trainings_list">
+                {% for training in get_bf_upcoming_trainings() %}
+                    <li>
+                        <a href="{{training.permalink}}" target="_blank">
+                            <span class="training_date">
+                                {{ training.start_date | date("F j") }} 
+                                {% if training.end_date %}
+                                    - {{ training.end_date | date("j") }}
+                                {% endif %},
+                                {{ training.start_date| date("Y") }}
+                            </span>
+                            <span class="training_type">{{training.type == "bf-intro" ? "Intro to Best Friends" : "Master Training Institute"}}</span>
+                            <span class="training_location">{{training.location}}</span>
+                            <span class="button_icon"><img src="{{theme.link}}/images/chevron-right.svg}}" height="25px" /></span>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <a href="{{flexlayout.view_all_trainings_link}}" class="btn btn-arrow">VIEW ALL TRAININGS<img src="{{theme.uri}}/images/arrow-sm-right.svg" height="25px"/></a>
+        </div>
+    </div>
+</section>

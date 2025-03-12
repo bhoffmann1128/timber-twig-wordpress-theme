@@ -1,0 +1,13 @@
+{{enqueue_style('faq-styles', '_faq_section.css')}}
+<section class="faq__section">
+    {% for faq_item in get_posts({'post_type' : 'faq', 'order_by' : 'menu_order'}) %}
+        <div class="faq__item">
+            <button class="accordion__btn"><h3 class="faq__title">{{faq_item.title}}</h3><span></span></button>
+            <div class="faq__item_content">
+                <div class="faq__item_content-inner">
+                    {{faq_item.content}}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</section>

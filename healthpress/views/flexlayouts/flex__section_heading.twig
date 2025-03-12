@@ -1,0 +1,7 @@
+{{enqueue_style('flex-section-heading', '_flex_section_heading.css')}}
+<section class="flex__section_heading animate__section">
+    <h2 style="color: {{flexlayout.heading_text_color}}">{{flexlayout.heading_text}}</h2>
+    {% if flexlayout.subheading_text %}
+        <h3>{{flexlayout.subheading_text}}</h3>
+    {% endif %}
+</section>

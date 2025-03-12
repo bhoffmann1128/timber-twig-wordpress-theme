@@ -1,0 +1,42 @@
+{% extends "base.twig" %}
+{% set flexNum = 0 %}
+
+
+{% block content %}
+	
+{% set flexLoop = post.meta('flexcontent') %}
+	{{ enqueue_style('page-styles','_page.css') }}
+	{% set sidebar_class = show_sidebar ? "page-has-sidebar" : "page-no-sidebar" %}	
+
+	{% for flexlayout in flexLoop %}
+        {% if flexlayout.acf_fc_layout == "flex__banner" and flexNum == 0 %}
+            {% include "flexlayouts/" ~ flexlayout.acf_fc_layout ~ ".twig" with {'topBanner': true} %}
+            {% set flexNum = 1 %}
+            {% set flexLoop = post.meta('flexcontent')|slice(1) %}
+        {% endif %}
+    {% endfor %}
+
+	<div class="content-wrapper hpp__page_template {{ sidebar_class }}">
+
+		{% if show_sidebar %}
+		{% include "sidebar.twig" %}
+		{% endif %}
+
+		<article class="post-type-{{post.post_type}}" id="post-{{post.ID}}">
+			<section class="article-content">
+				{% if show_page_title %}
+					<h1 class="article__title">{{post.title}}</h1>
+					<div class="article__title-divider"></div>
+				{% endif %}
+				<div class="article-body">
+					{{post.content}}
+				</div>
+			</section>
+
+			{% for flexlayout in flexLoop %}
+                {% include "flexlayouts/" ~ flexlayout.acf_fc_layout ~ ".twig" with {'page__show_sidebar':show_sidebar} %}
+            {% endfor %}
+
+		</article>
+	</div><!-- /content-wrapper -->
+{% endblock %}

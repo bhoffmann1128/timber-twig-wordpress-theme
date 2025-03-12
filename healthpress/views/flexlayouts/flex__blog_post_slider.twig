@@ -1,0 +1,32 @@
+{{ enqueue_style('blog-post-slider', '_flex_blog_post_slider.css' )}}
+{{ enqueue_package('swiper-script', '/vendor/swiper/swiper-bundle.min.js', 'swiper-style', '/vendor/swiper/swiper-bundle.min.css' )}}
+
+<section class="flex__blogpost_slider animate__section">
+
+
+    <div class="blogposts__slider_header section__header">
+        <h2>The HPP Blog</h2>
+        <a href="/articles/" class="btn btn-arrow">VIEW ALL POSTS <img src="{{theme.uri}}/images/arrow-sm-right.svg" height="25px"/></a>
+    </div>
+    <div class="blogpost__container swiper-blogposts">
+        <div class="swiper-wrapper">
+            {% for blogpost in get_hpp_blog_posts()  %}
+                <a class="blogpost__single_item swiper-slide" href="/blog/article/?pageid={{blogpost.id}}" >    
+                    <div class="blogpost__single_item-inner">
+                        <div class="blogpost__single_image" style="background-image: url({{blogpost.image[0]}})" ></div>
+                        <h3>{{blogpost.title}}</h3>
+                        <div class="blogpost__single_excerpt">
+                            {{blogpost.excerpt}}
+                        </div>
+                        <button class="btn btn-default" href="/blog/article/?pageid={{blogpost.id}}" target="_blank">READ MORE <span>➞</span></button>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="slider__button_container">
+        <div class="swiper-button-prev blogpost-slider-prev"></div>
+        <div class="swiper-button-next blogpost-slider-next"></div>
+    </div>
+    <div class="swiper-pagination"></div>
+</section>

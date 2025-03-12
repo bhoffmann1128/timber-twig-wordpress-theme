@@ -1,0 +1,17 @@
+{{enqueue_child_style('flex-product-feature', '_flex_product_feature.css')}}
+<section class="flex__product-feature animate__section">
+    <div class="product-feature__left">
+        <div class="product-feature__left-inner">
+            {% set featurepost = get_post(flexlayout.feature_product[0].ID) %}
+            {{ fn('timber_set_product', featurepost) }}
+            <div class="product-feature__media">
+                <a href="{{featurepost.link}}"><img src="{{get_image(featurepost.thumbnail).src | resize(300)}}" /></a>
+            </div>
+            {{ fn('do_shortcode', '[add_to_cart show_price="false" id="' ~ featurepost.id ~ '"]') }}
+        </div>
+    </div>
+    <div class="product-feature__right">
+        <a href="{{featurepost.link}}" class="product-feature__view-product-btn">VIEW PRODUCT</a>
+        {{flexlayout.feature__content}}
+    </div>
+</section>

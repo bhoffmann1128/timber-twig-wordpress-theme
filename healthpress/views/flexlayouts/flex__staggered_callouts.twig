@@ -1,0 +1,26 @@
+{{enqueue_style('flex-staggered-callout', '_flex_staggered_callouts.css')}}
+<section class="flex__staggered_callout">
+
+    {% if flexlayout.header_title %}
+    <div class="flex__staggered_callout_top section__header animate__section">
+        <img src="{{get_image(flexlayout.header_image).src }}" width="100px" />
+        <h2>{{flexlayout.header_title}}</h2>
+        <h3>{{flexlayout.header_subheading}}</h3>
+    </div>
+    {% endif %}
+    <div class="flex__staggered_callout_bottom">
+        {% for callout_item in flexlayout.staggered_callout %}
+            <div class="staggered__callout_item" style="background-color: {{callout_item.callout_background_color}}; color: {{callout_item.callout_text_color}}">
+                <div class="staggered__callout_item-imagecolumn callout__column" style="background-image: url({{get_image(callout_item.callout_image).src}})">
+
+                </div>
+                <div class="staggered__callout_item-textcolumn callout__column" >
+                    <div class="textcolumn-inner">
+                        {{callout_item.callout_text}}
+                    </div>
+                    <a href="{{flexlayout.callout_link}}" class="btn btn-arrow" target="_blank">{{callout_item.callout_link_text}}<span>→</span></a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>

@@ -1,0 +1,14 @@
+{{ enqueue_style('flex-grid-callouts','_flex_gridcallouts.css') }}
+
+<section class="flex__grid_callouts grid__rows-{{ flexlayout.columns }} animate__section">
+    {% for grid_item in flexlayout.grid_callouts %}
+        <a class="grid__callout_item style__{{flexlayout.callout_style}}" style="background-image: url({{get_image(grid_item.grid_callout_image).src}})">
+            <div class="grid__callout_content">
+                <h3>{{grid_item.grid_callout_header}}</h3>
+                <p>{{grid_item.grid_callout_description}}</p>
+            </div>
+            <button href="{{grid_item.grid_callout_link}}">LEARN MORE <span>➞</span></button>
+            <div class="grid__overlay"></div>
+        </a>
+    {% endfor %}
+</section>

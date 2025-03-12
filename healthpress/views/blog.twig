@@ -1,0 +1,39 @@
+{% extends "base.twig" %}
+
+{% block content %}
+{{ enqueue_style('page-styles','_page.css') }}
+{% set sidebar_class = show_sidebar ? "page-has-sidebar" : "page-no-sidebar" %}	
+	<div class="content-wrapper hpp__page_template {{ sidebar_class }}">
+
+        {% if show_sidebar %}
+		{% include "sidebar.twig" %}
+		{% endif %}
+
+        <article class="post-type-{{post.post_type}}" id="post-{{post.ID}}">
+			<section class="article-content">
+				{% if show_page_title %}
+					<h1 class="page__header">{{post.title}}</h1>
+				{% endif %}
+				<div class="article-body">
+					{{post.content}}
+				</div>
+			</section>
+
+			{% for flexlayout in flexLoop %}
+                {% include "flexlayouts/" ~ flexlayout.acf_fc_layout ~ ".twig" with {'page__show_sidebar':show_sidebar} %}
+            {% endfor %}
+
+            <div class="announcements__container {{sidebar_class}}">
+                {% for post in announcements %}
+                    {% include ['tease-'~post.post_type~'.twig', 'tease.twig'] %}
+                {% endfor %}
+            </div>
+        
+        {% include 'partial/pagination.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
+
+		</article>
+
+       
+
+	</div><!-- /content-wrapper -->
+{% endblock %}

@@ -1,0 +1,73 @@
+{% block html_head_container %}
+
+{% include 'html-header.twig' %}
+	{% block head %}
+	{% endblock %}
+	</head>
+{% endblock %}
+
+	<body class="{{body_class}}" data-template="base.twig">
+		{{ function('wp_body_open') }}
+		<a class="skip-link screen-reader-text" href="#content">{{ _e( 'Skip to content') }}</a>
+		<header class="header" >
+			{% block header %}
+				<div class="wrapper">
+					<div class="header__top">
+						<h1 class="hdr-logo" role="banner">
+							<a class="hdr-logo-link" href="{{site.url}}" rel="home"><img src="{{ get_image(options.header_site_logo) | resize(200) }}" /></a>
+						</h1>
+						<div class="header__top-right">
+							{% include 'utilitynav.twig' %}
+						</div>
+					</div>
+					<div class="header__bottom">
+						<button id="navbar-toggle"><img src="{{theme.uri}}/images/hamburger-icon.svg" height="50px"/></button>
+						<nav id="nav-main" class="nav-main" role="navigation">
+							{% include "menu.twig" with {'items': menu.get_items} %}
+							<button id="navSearchButton" class="nav__search_button"  ><img src="{{theme.uri}}/images/search-icon.svg" alt="search icon" /></button>
+						</nav><!-- #nav -->
+						<div id="searchNavContainer">
+							<form role="search" method="get" id="searchform" class="searchform" action="{{ site.link }}">
+								<input type="text" id="searchInput" value="{{ function('get_search_query') }}" name="s" id="s" />
+								<input type="submit" id="searchsubmit" value="Search" />
+							</form
+						</div>
+					</div>
+				</div>
+			{% endblock %}
+		</header>
+
+		<main>
+			<section id="content" role="main" class="content-wrapper">
+				<div class="wrapper">
+					{% block content %}
+						Sorry, no content
+					{% endblock %}
+				</div>
+				{% if sidebar %}
+					<aside class="layout-sidebar">
+						{{sidebar}}
+					</aside>
+				{% endif %}
+			</section>
+
+			<section class="footer__social_media">
+				<div class="footer__social_media-inner">
+					<h3>{{options.footer__socialmedia_title}}</h3>
+					<div class="socialmedia__iconholder">
+						{% for socialitem in options.social_media_links %}
+							<a title="{{socialitem.socialmedia__title}} link" href="{{socialitem.socialmedia__link}}" target="_blank"><img src="{{ get_image(socialitem.socialmedia__icon) }}" /></a>
+						{% endfor %}
+					</div>
+				</div>
+			</section>
+		</main>
+		
+		{% block footer %}
+			<footer id="footer">
+				{% include 'footer.twig' %}
+			</footer>
+			{{ function('wp_footer') }}
+		{% endblock %}
+	</body>
+</html>

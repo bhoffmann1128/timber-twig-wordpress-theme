@@ -1,0 +1,32 @@
+{{ enqueue_style('flex-callout-accordion','_flex_callout_accordion.css') }}
+
+<section class="callout__accordion animate__section {{flexlayout.accordion_style}}">
+    <div class="callout__accordion-top">
+        <h2>{{flexlayout.section_heading}}</h2>
+    </div>
+    <div class="callout__accordion-bottom">  
+        {% if not flexlayout.disable_left_side %}
+        <div class="callout__accordion-left">
+            <img src="{{ get_image(flexlayout.callout_image).src }}" />
+        </div>
+        {% endif %}
+        <div class="callout__accordion-right">
+            
+            {% for accordion_item in flexlayout.accordion_sections %}
+                <div class="accordion__item">
+                    <button class="accordion__btn"><h3>{{accordion_item.accordion_header}}</h3><span></span></button>
+                    <div class="accordion__item_content">
+                        <div class="accordion__item_content-inner">
+                            {{accordion_item.accordion_content}}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            
+        </div>
+    </div>
+    
+</section>
+
+
+    

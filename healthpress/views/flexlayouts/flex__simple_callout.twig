@@ -1,0 +1,19 @@
+{{enqueue_style('flex-simple-callout', '_flex_simple_callout.css')}}
+<section class="flex__simple_callout {{flexlayout.callout_spacing}} animate__section" style="background-color:{{flexlayout.background_color}}">
+    {% set imageType = flexlayout.image_type %}
+    <div class="simplecallout__left {{imageType}}">
+        {% if flexlayout.callout_link %}
+        <a href="{{ flexlayout.callout_link }}">
+            <img src="{{get_image(flexlayout.left_side_image).src }}" />
+        </a>
+        {% else %}
+            <img src="{{get_image(flexlayout.left_side_image).src }}" />
+        {% endif %}
+    </div>
+    <div class="simplecallout__right" style="color: {{flexlayout.text_color}}" >
+        {{flexlayout.right_side_content}}
+        {% if flexlayout.callout_link %}
+            <a href="{{flexlayout.callout_link}}" class="btn btn-primary">{{flexlayout.callout_link_text}}</a>
+        {% endif %}
+    </div>
+</section>

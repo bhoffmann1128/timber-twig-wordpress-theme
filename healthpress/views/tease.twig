@@ -1,0 +1,19 @@
+<article class="tease tease-{{post.type}}" id="tease-{{post.id}}">
+	<div class="article__inner">
+	{% block content %}
+		<div class="tease__left">
+			{% if post.thumbnail %}
+				<img src="{{post.thumbnail.src}}" />
+			{% else %}
+				<img src="/wp-content/uploads/2020/11/bestfriends-default-image.png" />
+			{% endif %}
+		</div>
+		<div class="tease__right">
+			<div>
+				<h2 class="h2"><a href="{{post.link}}">{{post.title}}</a></h2>
+				<p>{{ post.excerpt({ words:100, read_more: false }) }}</p>
+			</div>	
+		</div>
+	{% endblock %}
+	</div>
+</article>

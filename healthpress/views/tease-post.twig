@@ -1,0 +1,22 @@
+{% extends "tease.twig" %}
+
+
+{% block content %}
+{{enqueue_style('tease-post-style', '_tease-post.css')}}
+	
+		<div class="tease__left">
+			{% if post.thumbnail.src %}
+				<img src="{{ post.thumbnail.src }}" />
+			{% else %}
+				<img src="{{options.default_image.url}}" />
+			{% endif %}
+		</div>
+		<div class="tease__right">
+			<div>
+				<h2><a href="{{post.link}}">{{ post.title }}</a></h2>
+				<p>{{ post.excerpt({ words:100, read_more: false }) }}</p>
+				<a href="{{post.link}}" class="btn btn-primary">READ MORE</a>
+			</div>
+		</div>
+		
+{% endblock %}

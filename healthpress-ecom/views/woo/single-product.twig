@@ -1,0 +1,31 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+    {% do action('woocommerce_before_single_product') %}
+
+    <article itemscope itemtype="https://schema.org/Product" class="single__product_details {{ post.class }}">
+
+        <div class="single__product_top">
+            <div class="entry-images">
+                <img src="{{ post.thumbnail.src('full') | resize(400) }}" />
+            </div>
+
+            <div class="summary entry-summary">
+                {% do action('woocommerce_single_product_summary') %}
+            </div>
+        </div>
+
+        {% do action('woocommerce_after_single_product_summary') %}
+
+        <meta itemprop="url" content="{{ post.link }}" />
+
+    </article>
+
+    {% do action('woocommerce_after_single_product') %}
+
+    {% for flexlayout in post.meta('flexcontent') %}
+        {% include "flexlayouts/" ~ flexlayout.acf_fc_layout ~ ".twig" with {'page__show_sidebar':show_sidebar} %}
+    {% endfor %}
+
+{% endblock  %}

@@ -1,0 +1,7 @@
+<div class="header__utlitynav">
+    {% if user %}
+        <h4 class="username">Hello <span>{{user.user_nicename}}</span></h4>
+    {% else %}
+        you are not loggedin
+    {% endif %}
+</div>

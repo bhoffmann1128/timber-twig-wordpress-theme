@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",(function(){acf.add_filter("color_picker_args",(function(e,f){return e.palettes=["#8b1e20","#037172","#006fba","#0f8c44","#ffffff","#000000"],e}))}));

@@ -1,0 +1,13 @@
+<div id="navCart">
+    {% set cartClass = cart_count > 0 ? "--active" : "" %}
+    <a id="navCartBtn" class="cart-button {{cartClass}}" href="{{cart_url}}" title="View your shopping cart">
+        <img src="{{theme.link}}/images/shoppingcart-icon.svg" height="25px" hidden />
+            <span class="cart-count-circle"><span id="wccartcount">{{cart_count}}</span></span>
+            <div class="cart_vertical_line"></div>
+            <span class="cart-amount" id="wccarttotal">{{cart_total}}</span>
+    </a>
+    
+</div>
+<button type="button" class="subscribe__btn" data-bs-toggle="modal" data-bs-target="#subscribeModal">
+    <img src="{{theme.link}}/images/envelope-icon.svg" height="25px">SUBSCRIBE</span>
+</button>

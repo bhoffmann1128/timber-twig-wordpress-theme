@@ -1,0 +1,25 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+
+    {% do action('woocommerce_before_main_content') %}
+
+    
+
+    <div class="before__shop_loop">
+        <div class="archive-header">
+            <h1>{{ title }}</h1>
+            {% do action('woocommerce_before_shop_loop') %}
+        </div>
+    </div>
+
+    <div class="loop product__archive_loop">
+        {% for post in products %}
+            {% include ["partials/tease-product.twig"] %}
+        {% endfor %}
+    </div>
+
+    {% do action('woocommerce_after_shop_loop') %}
+    {% do action('woocommerce_after_main_content') %}
+
+{% endblock  %}

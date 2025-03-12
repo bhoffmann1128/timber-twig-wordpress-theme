@@ -1,0 +1,25 @@
+<div class="footer__columns">
+    <div class="footer__columns-inner">
+        <div class="footer__columns-left">{{footer_left}}</div>
+        <div class="footer__columns-center">{{footer_center}}</div>
+        <div class="footer__columns-right">{{footer_right}}</div>
+    </div>
+</div>
+<div class="footer__bottom">
+    <div class="footer__bottom-inner">
+        <div class="footer__bottom-left">
+        <ul>
+                <li><a href="/privacy-policy-2/">Privacy Policy</a></li>
+                <li><a href="/copyright-info/">Copyright Notice</a></li>
+                <li><a href="/sitemap">Sitemap</a></li>
+            </ul>
+        </div>
+        <div class="footer__bottom-center">
+            <a href="https://healthpropress.com" target="_blank"><img src="{{get_image(options.footer_logo) | resize(300) }}" /></a>
+        </div>
+        <div class="footer__bottom-right">
+            {{options.footer_copyright_text}}
+        </div>
+    </div>
+</div>
+

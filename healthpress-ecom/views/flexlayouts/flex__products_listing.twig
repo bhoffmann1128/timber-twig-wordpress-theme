@@ -1,0 +1,77 @@
+{{enqueue_child_style('flex-products-listing', '_flex_products_listing.css')}}
+<section class="flex__products_listing animate__section">
+    <div class="flex__products_listing_header section-header">
+        <h2>{{flexlayout.heading}}</h2>
+        
+        {% if flexlayout.type == "products-category" or flexlayout.type == "featured-products" and (123 not in flexlayout.product_category) %}
+            {% if flexlayout.products_listing_link %}
+                <a href="{{products_listing_link}}" class="btn btn-arrow">{{flexlayout.products_listing_link_text}}<img src="{{theme.uri}}/images/arrow-sm-right.svg" height="25px"/></a>
+            {% endif %}
+        {% endif %}
+    </div>
+    {% set feature_type = flexlayout.products_feature_type == "grid" ? "feature-grid" : "swiper" %}
+    {% set productLength = flexlayout.featured_products|length %}
+    {% set columnNumber = productLength < 4 ? productLength : 4 %}
+    {% set columnClass = "grid-"~columnNumber %}
+    
+
+    <div class="flex__products_listing_list type-{{flexlayout.products_feature_type}} {{feature_type}} {{columnClass}}" >
+
+        {% if feature_type == "swiper" %}
+            <div class="swiper-wrapper">
+        {% endif %}
+        
+        {% if flexlayout.type == "products-category" %}
+            {% for product in get_products_by_category(flexlayout.product_category) %}
+                {% set post = get_post(product.ID) %}
+                {{ fn('timber_set_product', post) }}
+                <div class="product__item {{ feature_type == "swiper" ? "swiper-slide" : '' }}">
+                        <div class="product__item-inner">
+                        {% if product.new_tag %}
+                            <div class="product__item-newtag"><span>NEW!</span></div>
+                        {% endif %}
+                        <a class="product__item-inner-cover" href="{{post.link}}"><img src="{{get_image(post.thumbnail).src | resize(300)}}" /></a>
+                        <h3 class="product__item-title"><a href="{{post.link}}">{{post.title}}</a></h3>
+                        {% if 123 not in flexlayout.product_category %}
+                            <h4 class="product__item-price">${{ productprice(product)}}</h4>
+                        {% endif %}
+                        {{ fn('do_shortcode', '[add_to_cart show_price="false" id="' ~ post.id ~ '"]') }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+
+        {% if flexlayout.type == "specific-products" or flexlayout.type == "featured-products" %}
+            {% for product in flexlayout.featured_products %}
+        
+                {% set post = get_post(product.product.ID) %}
+                {{ fn('timber_set_product', post) }}
+                
+                <div class="product__item {{ feature_type == "swiper" ? "swiper-slide" : '' }}">
+                        <div class="product__item-inner">
+                        {% if product.new_tag %}
+                            <div class="product__item-newtag"><span>NEW!</span></div>
+                        {% endif %}
+                        <a class="product__item-inner-cover" href="{{post.link}}"><img src="{{get_image(post.thumbnail).src | resize(300)}}" /></a>
+                        <h3 class="product__item-title"><a href="{{post.link}}">{{post.title}}</a></h3>
+                        <h4 class="product__item-price">${{ productprice(product.product)}}</h4>
+                        {{ fn('do_shortcode', '[add_to_cart show_price="false" id="' ~ post.id ~ '"]') }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% if feature_type == "swiper" %}
+            </div>
+        {% endif %}
+
+    </div>
+    {% if flexlayout.products_feature_type == "slider" %}
+    <div class="productslisting__button_container">
+        <div class="swiper-button-prev flexproducts_prev"></div>
+        <div class="swiper-button-next flexproducts_next"></div>
+    </div>
+    <div class="swiper-pagination"></div>
+    {% endif %}
+</section>

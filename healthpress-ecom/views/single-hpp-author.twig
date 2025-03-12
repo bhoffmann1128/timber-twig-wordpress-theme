@@ -1,0 +1,38 @@
+{% extends "base.twig" %}
+
+{% block content %}
+	<div class="content-wrapper">
+		<article class="post-type-{{ post.post_type }}" id="post-{{ post.ID }}">
+			<section class="article-content">
+				<h1 class="article-h1">{{ post.title }}</h1>
+				<div class="article-body">
+					{{post.content}}
+				</div>
+			</section>
+			<section class="author__products">
+				<div class="author__products_header">
+					<h3>Books by {{post.title}}</h3>
+				</div>
+				<div class="author__products_list">
+					{% for product in post.meta('author_products') %}
+						
+							{% set post = get_post(product.ID)  %}
+							{{ fn('timber_set_product', post) }}
+
+							<div class="product__item">
+									<div class="product__item-inner">
+									{% if product.new_tag %}
+										<div class="product__item-newtag"><span>NEW!</span></div>
+									{% endif %}
+									<a href="{{post.link}}"><img src="{{get_image(post.thumbnail).src | resize(300)}}" /></a>
+									<h3 class="product__item-title"><a href="{{post.link}}">{{post.title}}</a></h3>
+									<h4 class="product__item-price">${{ productprice(product)}}</h4>
+									{{ fn('do_shortcode', '[add_to_cart show_price="false" id="' ~ post.id ~ '"]') }}
+								</div>
+							</div>
+					{% endfor %}
+				</div>
+			</section>
+		</article>
+	</div><!-- /content-wrapper -->
+{% endblock %}

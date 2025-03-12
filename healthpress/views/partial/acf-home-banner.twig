@@ -1,0 +1,10 @@
+{{ enqueue_style('flex-banner','_flexbanner.css') }}
+<div class="acf__banner">
+    {% for item in post.meta('my_repeater') %}
+        <div class="banner__item">
+            <h4>{{ item.name }}</h4>
+            <h6>{{ item.info }}</h6>
+            <img src="{{ get_image(item.picture).src }}" />
+        </div>
+    {% endfor %}
+</div>

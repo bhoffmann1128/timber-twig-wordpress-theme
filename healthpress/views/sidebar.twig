@@ -1,0 +1,15 @@
+{% set parent_pageid = function('wp_get_post_parent_id',  post_parent) %}
+{% if parent_pageid == 0 %}{% set parent_pageid = post.ID %}{% endif %}
+
+
+<div class="page__sidebar">
+    <ul>
+    {% for menuitem in menu.items %}
+        {% for childitem in menuitem.children %}
+            {% if childitem.post_parent == parent_pageid %}
+            <li><a href="{{childitem.link}}" class="{% if menu.current_item == childitem %}--active{% endif %}"> {{childitem.title}}</a></li>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+    </ul>
+</div>
